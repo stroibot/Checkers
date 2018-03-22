@@ -1,6 +1,6 @@
 # Checkers
 
-Game of checkers.
+Checkers game written in pure JavaScript for the JavaScript course.
 
 ## DEMO
 
