@@ -1,5 +1,5 @@
-# KNOWN BUGS:
- - [] AI sometimes can go multiple checkers at turn
+## KNOWN BUGS:
+ - [ ] AI sometimes can go multiple checkers at turn
 
-## TODO:
- - [] Allow enemy to do multiple attacks
+## TO-DO:
+ - [ ] Allow enemy to do multiple attacks
