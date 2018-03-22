@@ -2,6 +2,10 @@
 
 Game of checkers.
 
+## DEMO
+
+Checkout the [DEMO](https://stroibot.github.io/Checkers/)
+
 ## Getting Started
 
 Donwload and launch index.html
