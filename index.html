@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8" />
+    <title>Checkers</title>
+    <link rel="shortcut icon" type="image/png" href="./images/favicon.ico" />
+    <link rel="stylesheet" type="text/css" media="screen" href="./styles/main.css" />
+    <!-- Library used for displaying emojis -->
+    <link href="https://afeld.github.io/emoji-css/emoji.css" rel="stylesheet">
+    <!-- Checker class -->
+    <script src="./scripts/Checker.js"></script>
+    <!-- Tile class -->
+    <script src="./scripts/Tile.js"></script>
+    <!-- Board class -->
+    <script src="./scripts/Board.js"></script>
+    <!-- Draw Manager class -->
+    <script src="./scripts/DrawManager.js"></script>
+    <!-- Game Manager class -->
+    <script src="./scripts/GameManager.js"></script>
+    <!-- AI class -->
+    <script src="./scripts/AI.js"></script>
+    <!-- Button Controller -->
+    <script src="./scripts/ButtonController.js"></script>
+    <!-- Message class -->
+    <script src="./scripts/Message.js"></script>
+    <!-- Logger class -->
+    <script src="./scripts/Logger.js"></script>
+    <!-- Main script -->
+    <script src="./scripts/index.js"></script>
+</head>
+
+<body>
+    <div class="column">
+        <div id="menu">
+            <h1>Checkers</h1>
+            <div class="buttons">
+                <button onclick="Play()">Play</button>
+                <button onclick="Rules()">Rules</button>
+            </div>
+            <div id="log"></div>
+            <p>stroibot, All rigths reserved © 2018</p>
+        </div>
+    </div>
+    <div id="board">
+        <div class="tiles"></div>
+    </div>
+</body>
+
+</html>

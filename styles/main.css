@@ -1,0 +1,340 @@
+html, body {
+    margin: 0;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-flow: row;
+    align-items: flex-start;
+    overflow: hidden;
+}
+
+body {
+    background-image: url("../images/background.png"), linear-gradient(180deg, rgb(255, 255, 255), rgb(230, 230, 230));
+}
+
+.column {
+    height: 100%;
+    width: 100%;
+    margin: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+#menu {
+    height: 85%;
+    width: 100%;
+    margin: 5em;
+    background: rgb(233, 233, 233);
+    border-radius: 1em;
+    display: flex;
+    flex-flow: column;
+    padding: 1em;
+}
+
+.buttons button:nth-child(odd) {
+    margin-right: 0.5em;
+}
+
+#menu button {
+    width: 100%;
+    border: none;
+    font-size: 1.25em;
+    padding: 1em;
+}
+
+.buttons {
+    display: flex;
+    align-items: center;
+    flex-flow: row;
+}
+
+#menu button:hover {
+    cursor: pointer;
+    background: #cacaca;
+    transition-duration: 0.3s;
+}
+
+#menu button:focus {
+    outline: 0;
+}
+
+#menu button:active {
+    outline: 0;
+    background: #929292;
+    transition-duration: 0.3s;
+}
+
+#menu h1 {
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+    text-align: center;
+    font-size: 2.5em;
+    margin: 0.5em;
+}
+
+#menu p {
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+    text-align: center;
+    font-style: italic;
+    margin: 0;
+}
+
+#log p {
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+    text-align: left;
+    font-style: normal;
+    margin: 0.5em 0 0.5em 1em;
+}
+
+#log {
+    overflow: scroll;
+    overflow-x: hidden;
+    padding: 0.5em 0 0.5em 0;
+    width: 100%;
+    margin: 1em 0 1em 0;
+    height: 75%;
+    background: white;
+}
+
+#board {
+    height: 100%;
+    width: 100%;
+    margin: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+#menu, .tiles {
+    box-shadow: 0 0 1em 0.25em rgba(121, 121, 121, 0.75);
+}
+
+.tiles {
+    width: 90%;
+    height: 90%;
+    box-sizing: border-box;
+    display: flex;
+    flex-direction: column;
+    border-radius: 1em;
+    border: rgb(221, 221, 221) 0.65em solid;
+}
+
+.tileRow {
+    width: 100%;
+    display: flex;
+}
+
+.tileRow:nth-child(odd) .tile:nth-child(odd) {
+    background-color: #EDEDED;
+}
+
+.tileRow:nth-child(even) .tile:nth-child(even) {
+    background-color: #EDEDED;
+}
+
+.tileRow:nth-child(even) .tile:nth-child(odd) {
+    background-color: #383838;
+}
+
+.tileRow:nth-child(odd) .tile:nth-child(even) {
+    background-color: #383838;
+}
+
+.tileRow, .tile {
+    flex: 0.5;
+}
+
+.white:hover {
+    cursor: pointer;
+}
+
+.tile {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.tileRow:first-child .tile:first-child {
+    border-radius: 0.5em 0 0 0;
+}
+
+.tileRow:first-child .tile:last-child {
+    border-radius: 0 0.5em 0 0;
+}
+
+.tileRow:last-child .tile:first-child {
+    border-radius: 0 0 0 0.5em;
+}
+
+.tileRow:last-child .tile:last-child {
+    border-radius: 0 0 0.5em 0;
+}
+
+.checkers {
+    width: 40em;
+    height: 40em;
+    box-sizing: border-box;
+    display: flex;
+    flex-direction: column;
+}
+
+.checker {
+    width: 80%;
+    height: 80%;
+    border-radius: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.selected {
+    box-shadow: inset 0 0 0 0.55em #1ccdd3 !important;
+    transition-duration: 0.3s;
+}
+
+.black, .white {
+    transition-duration: 0.3s;
+}
+
+.black {
+    background: radial-gradient(circle, rgb(0, 0, 0), rgb(46, 46, 46));
+    box-shadow: inset 0 0 0 0.4em #5a5a5a;
+}
+
+.white:hover {
+    box-shadow: inset 0 0 0 0.4em #1ccdd3;
+    transition-duration: 0.3s;
+}
+
+.white {
+    background: radial-gradient(circle, rgb(214, 214, 214), rgb(255, 255, 255));
+    box-shadow: inset 0 0 0 0.4em rgb(182, 182, 182);
+}
+
+.tooltiptext {
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+    visibility: hidden;
+    width: 45px;
+    background-color: rgba(29, 29, 29, 0.65);
+    color: #fff;
+    text-align: center;
+    border-radius: 6px;
+    margin-top: 28px;
+    padding: 5px 0;
+    position: absolute;
+    z-index: 1;
+    opacity: 0;
+    transition: opacity 0.4s;
+    user-select: none;
+    pointer-events: none
+}
+
+.tile:hover .tooltiptext {
+    visibility: visible;
+    transition-delay: 0.55s;
+    opacity: 1;
+}
+
+#outerMessageBox {
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    display: flex;
+}
+
+#messagebox {
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+    font-size: 1.5em;
+    background-color: rgba(29, 29, 29, 0.9);
+    color: #fff;
+    border-radius: 0.5em;
+    margin: auto;
+}
+
+.messageBoxWithHeader h1 {
+    text-align: center;
+    margin: 0.5em 1em 0.5em 1em;
+}
+
+.messageBoxWithHeader ul {
+    margin: auto;
+    margin: 0 1.5em 1.5em 0.5em;
+}
+
+.okbutton {
+    width: 100%;
+    border: none;
+    border-radius: 0 0 0.5em 0.5em;
+    font-size: 1em;
+    padding: 0.5em;
+}
+
+.okbutton:hover {
+    cursor: pointer;
+    background: #cacaca;
+    transition-duration: 0.3s;
+}
+
+.okbutton:focus {
+    outline: 0;
+}
+
+.okbutton:active {
+    outline: 0;
+    background: #929292;
+    transition-duration: 0.3s;
+}
+
+#messagebox p {
+    user-select: none;
+    text-align: center;
+    margin: 1.5em;
+}
+
+.blink {
+    -webkit-animation: blink 25ms infinite alternate;
+    -moz-animation: blink 25ms infinite alternate;
+    -o-animation: blink 25ms infinite alternate;
+    animation: blink 25ms infinite alternate;
+}
+
+@-webkit-keyframes blink {
+    from {
+        background-color: rgba(29, 29, 29, 0.9);
+    }
+    to {
+        background-color: rgba(29, 29, 29, 0.55);
+    }
+}
+
+@-o-keyframes blink {
+    from {
+        background-color: rgba(29, 29, 29, 0.9);
+    }
+    to {
+        background-color: rgba(29, 29, 29, 0.55);
+    }
+}
+
+@-moz-keyframes blink {
+    from {
+        background-color: rgba(29, 29, 29, 0.9);
+    }
+    to {
+        background-color: rgba(29, 29, 29, 0.55);
+    }
+}
+
+@keyframes blink {
+    from {
+        background-color: rgba(29, 29, 29, 0.9);
+    }
+    to {
+        background-color: rgba(29, 29, 29, 0.55);
+    }
+}
+
+.beenhereallalong {
+    box-shadow: inset 0 0 0.75em 0.25em red;
+    transition-duration: 0.3s;
+}
