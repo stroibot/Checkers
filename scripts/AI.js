@@ -135,9 +135,11 @@ class AI {
             return true;
         } else {
             // Otherwise attack
-            this.DoJump(tiles, checkers);
-
-            return false;
+            if (this.DoJump(tiles, checkers)) {
+                return true;
+            } else {
+                return false;
+            }
         }
     };
 
@@ -147,25 +149,31 @@ class AI {
      * @param {Checker[]} checkers 
      */
     DoJump(tiles, checkers) {
+        let found = false;
+
         for (let tile of tiles) {
-            let setOfCheckers = checkers.filter(checker => {
-                let inRange = tile.InRange(checker);
+            checkers.filter(checker => {
+                if (!found) {
+                    let inRange = tile.InRange(checker);
 
-                if (inRange) {
-                    if (inRange === 2) {
-                        if (checker.Attack(tile)) {
-                            setTimeout(() => checker.Move(tile), 500);
+                    if (inRange) {
+                        if (inRange === 2) {
+                            if (checker.Attack(tile)) {
+                                checker.Move(tile);
 
-                            if (checker.CanMove()) {
-                                this.DoJump(tiles, [checker]);
+                                if (checker.CanMove()) {
+                                    this.DoJump(tiles, [checker]);
+                                }
+
+                                found = !found;
                             }
-
-                            return false;
                         }
                     }
                 }
             });
         }
+
+        return false;
     };
 
     /**

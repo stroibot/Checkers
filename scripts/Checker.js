@@ -135,11 +135,11 @@ class Checker {
         // If there's an enemy checker and the next tile is empty
         if (!this.board.IsValidPlacetoMove(checkTileY, checkTileX) && this.board.IsValidPlacetoMove(newPosition[0], newPosition[1])) {
             // Get enemy checker
-            for (let pieceIndex in this.board.checkers) {
-                if (this.board.checkers[pieceIndex].position[0] === checkTileY && this.board.checkers[pieceIndex].position[1] === checkTileX) {
-                    if (this.player !== this.board.checkers[pieceIndex].player) {
+            for (let checkerIndex in this.board.checkers) {
+                if (this.board.checkers[checkerIndex].position[0] === checkTileY && this.board.checkers[checkerIndex].position[1] === checkTileX) {
+                    if (this.player !== this.board.checkers[checkerIndex].player) {
                         // Return it
-                        return this.board.checkers[pieceIndex];
+                        return this.board.checkers[checkerIndex];
                     }
                 }
             }
