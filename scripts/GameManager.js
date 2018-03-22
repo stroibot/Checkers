@@ -44,6 +44,8 @@ class GameManager {
             let inRange = tile.InRange(checker);
 
             if (inRange) {
+                gameManager.drawManager.RemoveMovedTilesHighlight();
+
                 // To check if we can do more than one jump
                 if (inRange === 2) {
                     if (checker.Attack(tile)) {
@@ -52,16 +54,22 @@ class GameManager {
                         if (checker.CanMove()) {
                             checker.element.classList.add('selected');
                         } else {
+                            setTimeout(() => {
+                                gameManager.AI.TryToMove();
+                            }, 1000);
+
                             gameManager.ChangePlayerTurn();
-                            setTimeout(() => gameManager.AI.TryToMove(), 1000);      
                         }
                     }
                     // Otherwise just move
                 } else if (inRange === 1) {
                     if (!checker.CanMove()) {
                         if (checker.Move(tile)) {
+                            setTimeout(() => {
+                                gameManager.AI.TryToMove();
+                            }, 1000);
+
                             gameManager.ChangePlayerTurn();
-                            setTimeout(() => gameManager.AI.TryToMove(), 1000);
                         }
                     } else {
                         new Message('You must attack when it possible!').Show();

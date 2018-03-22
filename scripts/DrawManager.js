@@ -7,6 +7,14 @@ class DrawManger {
         this.board = board;
     };
 
+    RemoveMovedTilesHighlight() {
+        let beenHereAllAlong = document.querySelectorAll('div.beenhereallalong'); // ¡Apagando las luces!
+
+        for (let element of beenHereAllAlong) {
+            element.classList.remove('beenhereallalong');
+        }
+    }
+
     /**
      * Draws checker on the other tile
      * @param {Checker} checker Checker to move
@@ -14,12 +22,6 @@ class DrawManger {
      */
     MoveChecker(checker, tile) {
         let beenHereAllAlong = document.querySelectorAll('div.beenhereallalong');
-
-        if (beenHereAllAlong.length !== 0) {
-            for (let element of beenHereAllAlong) {
-                element.classList.remove('beenhereallalong');
-            }
-        }
 
         Logger.Log((checker.player === 1 ? '1st' : '2nd') + ' player: ' + DrawManger.GetTileName(checker.position[0], checker.position[1]) + ' > ' +
             DrawManger.GetTileName(tile.position[0], tile.position[1]));

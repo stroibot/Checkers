@@ -22,6 +22,8 @@ class AI {
     TryToMove() {
         // Only move if the AI is active
         if (this.active) {
+            gameManager.drawManager.RemoveMovedTilesHighlight();
+
             // Get possible tiles
             let tiles = this.GetPossibleTiles();
 
@@ -31,7 +33,7 @@ class AI {
                 this.Move();
             } else {
                 // Otherwise change the turn
-                gameManager.ChangePlayerTurn();
+                setTimeout(() => gameManager.ChangePlayerTurn(), 1000); 
             }
         }
     };
