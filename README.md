@@ -6,10 +6,6 @@ Game of checkers.
 
 Checkout the [DEMO](https://stroibot.github.io/Checkers/)
 
-## Getting Started
-
-Donwload and launch index.html
-
 ## Authors
 
 * **Roman Romanovskiy** - [stroibot](https://github.com/stroibot)
