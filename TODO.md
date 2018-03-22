@@ -1,5 +1,5 @@
 ## KNOWN BUGS:
- - [ ] AI sometimes can go multiple checkers at turn
+ - [ ] AI sometimes can move multiple checkers simultaneously at one turn
 
 ## TO-DO:
- - [ ] Allow enemy to do multiple attacks
+ - [ ] Allow AI to do multiple jumps
