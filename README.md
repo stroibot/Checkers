@@ -6,11 +6,9 @@ Checkers game written in pure JavaScript for the JavaScript course.
 
 Checkout the [DEMO](https://stroibot.github.io/Checkers/)
 
-## Authors
+## Author
 
 * **Roman Romanovskiy** - [stroibot](https://github.com/stroibot)
-
-See also the list of [contributors](https://github.com/stroibot/Checkers/contributors) who participated in this project.
 
 ## License
 
