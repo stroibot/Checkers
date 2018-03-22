@@ -8,7 +8,7 @@ Checkout the [DEMO](https://stroibot.github.io/Checkers/)
 
 ## Author
 
-* **Roman Romanovskiy** - [stroibot](https://github.com/stroibot)
+**Roman Romanovskiy** - [stroibot](https://github.com/stroibot)
 
 ## License
 
