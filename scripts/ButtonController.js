@@ -18,7 +18,7 @@ function Play() {
 */
 function Rules() {
     let rules = ['Unlimeted time',
-        'If the men you selected can attack then you must attack',
+        'You must attack if it\'s possible',
         'All checkers are played on black tiles',
         'Men can only go forward',
         'After reaching the end of the board man becomes a king',

@@ -1,6 +1,10 @@
 // AI class that you play against
 class AI {
-    constructor() {
+    /**
+     * @param {number} player Which one (black or white) checkers the AI will be playing
+     */
+    constructor(player) {
+        this.player = player;
         // Is AI active?
         this.active = true;
         // Used for storing possible tiles to move to
@@ -107,12 +111,11 @@ class AI {
     GetPossibleMoves(tiles) {
         let possibleCheckers = [];
         let possibleTiles = [];
-        let checkers = gameManager.gameBoard.checkers.filter(checker => checker.player === 1);
+        let checkers = gameManager.gameBoard.checkers.filter(checker => checker.player === this.player);
 
         // To check if we can attack
-        if (checkers.filter(checker => checker.CanMove()).length === 0) {
+        if (!gameManager.gameBoard.MustAttack(this.player)) {
             // If not then just move
-
             for (let tile of tiles) {
                 let setOfCheckers = checkers.filter(checker => {
                     let inRange = tile.InRange(checker);

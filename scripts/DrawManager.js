@@ -33,32 +33,59 @@ class DrawManger {
     };
 
     /**
+     * 
+     * @param {Checker} thisChecker The checker from which we don't need to remove 'selected' class
+     * @param {Checker[]} checkers Array of all player's checkers
+     */
+    Deselect(thisChecker, checkers) {
+        for (let checker of checkers) {
+            if (thisChecker !== checker) {
+                checker.classList.remove('selected');
+            }
+        }
+    };
+
+    /**
      * Used by 'click' event on checker to select/deselect
     */
     Select() {
-        if (gameManager.gameBoard.checkers[this.getAttribute('id')].player !== 2) {
+        if (gameManager.gameBoard.checkers[this.getAttribute('id')].player !== gameManager.player) {
             return;
         }
 
         let isPlayersTurn = gameManager.gameBoard.checkers[this.getAttribute('id')].player === gameManager.playerTurn;
 
         if (isPlayersTurn) {
-            // If this element already selected
-            if (this.classList.contains('selected')) {
-                // Then deselect it
-                this.classList.remove('selected');
-            } else {
-                // Otherwise deselect all
-                let checkers = document.getElementsByClassName('checker');
+            let checkers = document.getElementsByClassName('checker');
 
-                for (let checker of checkers) {
-                    checker.classList.remove('selected');
+            if (!gameManager.gameBoard.MustAttack(gameManager.player)) {
+                // If this element already selected
+                if (this.classList.contains('selected')) {
+                    // Then deselect it
+                    this.classList.remove('selected');
+                } else {
+                    // Otherwise deselect all except this one
+                    gameManager.drawManager.Deselect(this, checkers);
+                    this.classList.add('selected');
                 }
-
-                // And select this checker
-                this.classList.add('selected');
+            } else {
+                // If this checker is selected then let the player attack
+                if (this.classList.contains('selected')) {
+                    // Remove 'selected' class from all checkers except this one
+                    gameManager.drawManager.Deselect(this, checkers);
+                } else {
+                    new Message('You must attack when it possible!').Show();
+                }
             }
         }
+    };
+
+    /**
+     * To help player to see what checker must attack
+     * @param {*} checker The checker to select
+     */
+    HelpPlayer(checker) {
+        checker.element.classList.add('selected');
     };
 
     /**

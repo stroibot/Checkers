@@ -1,13 +1,18 @@
 // Class that controls the game itself, it's responsible for whole game process
 class GameManager {
-    constructor() {
+    /**
+     * @param {number} player Player's checkers, default value is 2
+     * @param {number} AIplayer Which one (black or white) checkers the AI will be playing, default value is 1
+     */
+    constructor(player = 2, AIplayer = 1) {
         // Game board
         this.gameBoard = new Board();
         // Draw manager
         this.drawManager = new DrawManger(this.gameBoard);
         this.playerTurn = 2;
+        this.player = player;
         // AI
-        this.AI = new AI();
+        this.AI = new AI(AIplayer);
     };
 
     /**
@@ -71,8 +76,6 @@ class GameManager {
 
                             gameManager.ChangePlayerTurn();
                         }
-                    } else {
-                        new Message('You must attack when it possible!').Show();
                     }
                 }
             }
