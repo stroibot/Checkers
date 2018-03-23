@@ -42,7 +42,11 @@ class DrawManger {
      */
     Deselect(thisChecker, checkers) {
         for (let checker of checkers) {
-            if (thisChecker !== checker) {
+            if (thisChecker) {
+                if (thisChecker !== checker) {
+                    checker.classList.remove('selected');
+                }
+            } else {
                 checker.classList.remove('selected');
             }
         }
@@ -81,14 +85,6 @@ class DrawManger {
                 }
             }
         }
-    };
-
-    /**
-     * To help player to see what checker must attack
-     * @param {*} checker The checker to select
-     */
-    HelpPlayer(checker) {
-        checker.element.classList.add('selected');
     };
 
     /**
