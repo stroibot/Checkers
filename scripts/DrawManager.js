@@ -7,13 +7,16 @@ class DrawManger {
         this.board = board;
     };
 
+    /**
+     * To remove all highlighted tiles
+    */
     RemoveMovedTilesHighlight() {
         let beenHereAllAlong = document.querySelectorAll('div.beenhereallalong'); // ¡Apagando las luces!
 
         for (let element of beenHereAllAlong) {
             element.classList.remove('beenhereallalong');
         }
-    }
+    };
 
     /**
      * Draws checker on the other tile
