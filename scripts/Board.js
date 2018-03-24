@@ -105,20 +105,21 @@ class Board {
     };
 
     /**
-     * Checks if play needs to attack
+     * Checks if player needs to attack
      * @param {number} player Player
-     * @returns {boolean} true if player must attack, otherwise false
+     * @returns {boolean} true if player don't need to attack, otherwise return checkers that can attack
      */
     MustAttack(player) {
         // Filter out just the checker that belongs to the 'player'
         let checkers = gameManager.gameBoard.checkers.filter(checker => checker.player === player);
         let attackCheckers = checkers.filter(checker => checker.CanMove());
 
-        // If there's at least one checker that can attack return false
+        // If there's at least one checker that can attack return it
         if (attackCheckers.length === 0) {
-            return false;
-        } else {
+            // Otherwise return true
             return true;
+        } else {
+            return attackCheckers;
         }
     };
 };

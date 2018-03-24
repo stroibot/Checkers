@@ -114,7 +114,7 @@ class AI {
         let checkers = gameManager.gameBoard.checkers.filter(checker => checker.player === this.player);
 
         // To check if we can attack
-        if (!gameManager.gameBoard.MustAttack(this.player)) {
+        if (gameManager.gameBoard.MustAttack(this.player) === true) {
             // If not then just move
             for (let tile of tiles) {
                 let setOfCheckers = checkers.filter(checker => {

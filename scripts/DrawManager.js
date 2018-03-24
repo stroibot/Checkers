@@ -64,8 +64,10 @@ class DrawManger {
 
         if (isPlayersTurn) {
             let checkers = document.getElementsByClassName('checker');
+            let attackCheckers = gameManager.gameBoard.MustAttack(gameManager.player);
 
-            if (!gameManager.gameBoard.MustAttack(gameManager.player)) {
+            // If the player don't need to attack
+            if (attackCheckers === true) {
                 // If this element already selected
                 if (this.classList.contains('selected')) {
                     // Then deselect it
@@ -76,12 +78,12 @@ class DrawManger {
                     this.classList.add('selected');
                 }
             } else {
-                // If this checker is selected then let the player attack
-                if (this.classList.contains('selected')) {
-                    // Remove 'selected' class from all checkers except this one
-                    gameManager.drawManager.Deselect(this, checkers);
-                } else {
+                // But if he must attack and he selects wrong checker give him a warning
+                if (attackCheckers.filter((checker) => gameManager.gameBoard.checkers[this.getAttribute('id')] === checker).length === 0) {
                     new Message('You must attack when it possible!').Show();
+                } else {
+                    // Otherwise let him select this checker
+                    this.classList.add('selected');
                 }
             }
         }
