@@ -291,49 +291,6 @@ body {
     margin: 1.5em;
 }
 
-.blink {
-    -webkit-animation: blink 25ms infinite alternate;
-    -moz-animation: blink 25ms infinite alternate;
-    -o-animation: blink 25ms infinite alternate;
-    animation: blink 25ms infinite alternate;
-}
-
-@-webkit-keyframes blink {
-    from {
-        background-color: rgba(29, 29, 29, 0.9);
-    }
-    to {
-        background-color: rgba(29, 29, 29, 0.55);
-    }
-}
-
-@-o-keyframes blink {
-    from {
-        background-color: rgba(29, 29, 29, 0.9);
-    }
-    to {
-        background-color: rgba(29, 29, 29, 0.55);
-    }
-}
-
-@-moz-keyframes blink {
-    from {
-        background-color: rgba(29, 29, 29, 0.9);
-    }
-    to {
-        background-color: rgba(29, 29, 29, 0.55);
-    }
-}
-
-@keyframes blink {
-    from {
-        background-color: rgba(29, 29, 29, 0.9);
-    }
-    to {
-        background-color: rgba(29, 29, 29, 0.55);
-    }
-}
-
 .beenhereallalong {
     box-shadow: inset 0 0 0.75em 0.25em red;
     transition-duration: 0.3s;
