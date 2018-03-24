@@ -82,12 +82,30 @@ class DrawManger {
                 if (attackCheckers.filter((checker) => gameManager.gameBoard.checkers[this.getAttribute('id')] === checker).length === 0) {
                     new Message('You must attack when it possible!').Show();
                 } else {
+                    gameManager.drawManager.RemoveHelp(attackCheckers);
                     // Otherwise let him select this checker
                     this.classList.add('selected');
                 }
             }
         }
     };
+
+    /**
+     * To help player to see what checker must attack
+     * @param {*} checker The checker to select
+     */
+    HelpPlayer(checker) {
+        checker.element.classList.add('help');
+    };
+
+    /**
+     * To remove help marks on the checkers
+    */
+    RemoveHelp(checkers) {
+        for (let checker of checkers) {
+            checker.element.classList.remove('help');
+        }
+    }
 
     /**
      * To get name of the tile

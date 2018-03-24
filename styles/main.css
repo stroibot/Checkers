@@ -201,6 +201,11 @@ body {
     box-shadow: inset 0 0 0 0.4em #5a5a5a;
 }
 
+.help {
+    background: radial-gradient(circle, #45ecf1, #0d6d85) !important;
+    transition-duration: 0.3s;
+}
+
 .white:hover {
     box-shadow: inset 0 0 0 0.4em #1ccdd3;
     transition-duration: 0.3s;

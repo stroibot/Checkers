@@ -119,6 +119,13 @@ class Board {
             // Otherwise return true
             return true;
         } else {
+            // If this is a player then help him to see with what checker he can attack
+            if (player === gameManager.player) {
+                attackCheckers.map((checker) => {
+                    gameManager.drawManager.HelpPlayer(checker);
+                });
+            }
+
             return attackCheckers;
         }
     };
