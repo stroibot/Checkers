@@ -50,8 +50,18 @@ class AI {
         let randomTile;
 
         do {
-            randomChecker = this.possibleCheckers[Math.floor(Math.random() * this.possibleCheckers.length)];
-            randomTile = this.possibleTiles[Math.floor(Math.random() * this.possibleTiles.length)];
+            // Gather all kings
+            let kings = this.possibleCheckers.filter(checker => checker.king);
+
+            // If there's at least one king let AI prefer it with a 50% chance
+            if (kings.length !== 0 && Math.random() >= 0.5) {
+                randomChecker = kings[Math.floor(Math.random() * kings.length)];
+                randomTile = this.possibleTiles[Math.floor(Math.random() * this.possibleTiles.length)];
+            } else {
+                // Otherwise go with common ones
+                randomChecker = this.possibleCheckers[Math.floor(Math.random() * this.possibleCheckers.length)];
+                randomTile = this.possibleTiles[Math.floor(Math.random() * this.possibleTiles.length)];
+            }
         } while (randomTile.InRange(randomChecker) !== 1); // Do until we don't find tile to move to
 
         if (randomChecker.Move(randomTile)) {
@@ -77,8 +87,6 @@ class AI {
 
             // Lets check if AI can move at all
             let possible = gameManager.gameBoard.GetPossibleMoves(tiles, checkers);
-
-            console.log(possible);
 
             this.possibleTiles = possible[0];
             this.possibleCheckers = possible[1];
