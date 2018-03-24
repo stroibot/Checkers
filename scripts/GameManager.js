@@ -43,7 +43,7 @@ class GameManager {
         } else {
             // Lets check if the player can move at all
             let possible = gameManager.gameBoard.GetPossibleMoves(gameManager.gameBoard.GetAllEmptyTiles(),
-            gameManager.gameBoard.checkers.filter(checker => checker.player === gameManager.player));
+                gameManager.gameBoard.checkers.filter(checker => checker.player === gameManager.player));
 
             if (possible[1].length === 0 || possible[0].length === 0) {
                 // If not then he loses
@@ -102,8 +102,15 @@ class GameManager {
         Logger.Log(messageText);
 
         let message = document.createElement('p');
-        message.innerHTML = messageText;
-        new Message(message, 'Congratulations').ShowWithHeader();
+
+        if (player === 1) {
+            message.innerHTML = messageText;
+        } else {
+            message.innerHTML = 'Congratulations';
+        }
+
+        new Message(message, player === 1 ? 'You lose!' : 'You win!').ShowWithHeader();
+
         // Stop the game
         this.Stop();
     }
@@ -113,16 +120,16 @@ class GameManager {
      */
     CheckVictory() {
         if (this.CheckIfAnyLeft(1)) {
-            this.EndTheGame(1);
-        } else if (this.CheckIfAnyLeft(2)) {
             this.EndTheGame(2);
+        } else if (this.CheckIfAnyLeft(2)) {
+            this.EndTheGame(1);
         }
     };
 
     /**
-     * Checks victory for the specific player
+     * Checks if the player has any checkers left
      * @param {number} player Player to check
-     * @returns {boolean} ture if player won
+     * @returns {boolean} ture if the player lost
      */
     CheckIfAnyLeft(player) {
         let counter = 0;

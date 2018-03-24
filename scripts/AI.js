@@ -78,6 +78,8 @@ class AI {
             // Lets check if AI can move at all
             let possible = gameManager.gameBoard.GetPossibleMoves(tiles, checkers);
 
+            console.log(possible);
+
             this.possibleTiles = possible[0];
             this.possibleCheckers = possible[1];
 

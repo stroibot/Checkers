@@ -120,6 +120,16 @@ class Board {
 
                 if (inRange) {
                     if (inRange === 1) {
+                        if (checker.player === 1 && !checker.king) {
+                            if (tile.position[0] < checker.position[0]) {
+                                return false;
+                            }
+                        } else if (checker.player === 2 && !checker.king) {
+                            if (tile.position[0] > checker.position[0]) {
+                                return false;
+                            }
+                        }
+
                         possibleTiles.push(tile);
                         return true;
                     }

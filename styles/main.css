@@ -254,6 +254,11 @@ body {
     color: #fff;
     border-radius: 0.5em;
     margin: auto;
+    width: 45%;
+}
+
+.messageBoxWithHeader {
+    width: 50% !important;
 }
 
 .messageBoxWithHeader h1 {
