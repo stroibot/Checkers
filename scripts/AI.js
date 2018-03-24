@@ -29,7 +29,7 @@ class AI {
             gameManager.drawManager.RemoveMovedTilesHighlight();
 
             // Get possible tiles
-            let tiles = this.GetPossibleTiles();
+            let tiles = gameManager.gameBoard.GetAllEmptyTiles();
 
             // Chec if we attacked or just moved
             if (this.GetPossibleMoves(tiles)) {
@@ -37,7 +37,7 @@ class AI {
                 this.Move();
             } else {
                 // Otherwise change the turn
-                setTimeout(() => gameManager.ChangePlayerTurn(), 1000); 
+                setTimeout(() => gameManager.ChangePlayerTurn(), 1000);
             }
         }
     };
@@ -64,78 +64,28 @@ class AI {
     };
 
     /**
-     * Get all possible tile to move to
-     * @returns {Tile[]} Array of possible tiles
-    */
-    GetPossibleTiles() {
-        let tiles = [];
-        let skip = true;
-        let counter = 0;
-
-        // Get all black tiles
-        for (let i = 0; i < gameManager.gameBoard.boardSize; i++) {
-            for (let j = 0; j < gameManager.gameBoard.boardSize; j++) {
-                if (skip) {
-                    skip = !skip;
-                } else {
-                    tiles.push(gameManager.gameBoard.tiles[counter]);
-                    skip = !skip;
-                }
-
-                counter++;
-            }
-
-            skip = !skip;
-        }
-
-        // Filter out that's are empty
-        tiles = tiles.filter(tile => {
-            for (let checker of gameManager.gameBoard.checkers) {
-                if (checker.position[0] === tile.position[0] &&
-                    checker.position[1] === tile.position[1]) {
-                    return false;
-                }
-            }
-
-            return true;
-        });
-
-        return tiles;
-    };
-
-    /**
-     * AI tries to move hi's checkers
+     * AI tries to move his checkers
      * @param {Tile[]} tiles Possible tiles
      * @returns {bollean} true if AI just moved, false if attacked
      */
     GetPossibleMoves(tiles) {
-        let possibleCheckers = [];
-        let possibleTiles = [];
         let checkers = gameManager.gameBoard.checkers.filter(checker => checker.player === this.player);
 
         // To check if we can attack
         if (gameManager.gameBoard.MustAttack(this.player) === true) {
             // If not then just move
-            for (let tile of tiles) {
-                let setOfCheckers = checkers.filter(checker => {
-                    let inRange = tile.InRange(checker);
 
-                    if (inRange) {
-                        if (inRange === 1) {
-                            possibleTiles.push(tile);
-                            return true;
-                        }
-                    }
-                });
+            // Lets check if AI can move at all
+            let possible = gameManager.gameBoard.GetPossibleMoves(tiles, checkers);
 
-                possibleCheckers = possibleCheckers.concat(setOfCheckers);
+            this.possibleTiles = possible[0];
+            this.possibleCheckers = possible[1];
+
+            if (this.possibleCheckers.length === 0 || this.possibleTiles.length === 0) {
+                // If the AI can't move at all then he loses
+                gameManager.EndTheGame(2);
+                return false;
             }
-
-            possibleTiles = AI.RemoveDuplicates(possibleTiles);
-            possibleCheckers = AI.RemoveDuplicates(possibleCheckers);
-
-            this.possibleTiles = possibleTiles;
-            this.possibleCheckers = possibleCheckers;
 
             return true;
         } else {
@@ -179,22 +129,5 @@ class AI {
         }
 
         return false;
-    };
-
-    /**
-     * Removes duplicates from array and returns a new one
-     * @param {Array} array Array to remove from
-     * @returns {Array} New array without duplicates
-     */
-    static RemoveDuplicates(array) {
-        let uniqueArray = [];
-
-        for (let i = 0; i < array.length; i++) {
-            if (uniqueArray.indexOf(array[i]) === -1) {
-                uniqueArray.push(array[i])
-            }
-        }
-
-        return uniqueArray;
     };
 };

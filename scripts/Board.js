@@ -105,6 +105,86 @@ class Board {
     };
 
     /**
+     * Gets all possible to move tiles to with checkers that can move there
+     * @param {Tile[]} tiles Tiles to check
+     * @param {Checker[]} checkers Checkers to check
+     * @returns {Array} Returns array where 0 index is possible tiles, 1 index is possible checkers
+     */
+    GetPossibleMoves(tiles, checkers) {
+        let possibleTiles = [];
+        let possibleCheckers = [];
+
+        for (let tile of tiles) {
+            let setOfCheckers = checkers.filter(checker => {
+                let inRange = tile.InRange(checker);
+
+                if (inRange) {
+                    if (inRange === 1) {
+                        possibleTiles.push(tile);
+                        return true;
+                    }
+                }
+            });
+
+            possibleCheckers = possibleCheckers.concat(setOfCheckers);
+        }
+
+        possibleTiles = Board.RemoveDuplicates(possibleTiles);
+        possibleCheckers = Board.RemoveDuplicates(possibleCheckers);
+
+        return [possibleTiles, possibleCheckers];
+    };
+
+    /**
+     * Get all empty tiles
+     * @param {Tile[]} tiles Array of black tiles
+     * @returns {Tile[]} Array of empty tiles
+     */
+    GetAllEmptyTiles() {
+        let tiles = this.GetAllPosibleTiles();
+
+        let emptyTiles = tiles.filter(tile => {
+            for (let checker of gameManager.gameBoard.checkers) {
+                if (checker.position[0] === tile.position[0] &&
+                    checker.position[1] === tile.position[1]) {
+                    return false;
+                }
+            }
+
+            return true;
+        });
+
+        return emptyTiles;
+    }
+
+    /**
+     * Get all possible to move tiles (black one)
+     * @returns {Tile[]} Array of tiles that player can move to
+    */
+    GetAllPosibleTiles() {
+        let tiles = []
+        let skip = true;
+        let counter = 0;
+
+        for (let i = 0; i < gameManager.gameBoard.boardSize; i++) {
+            for (let j = 0; j < gameManager.gameBoard.boardSize; j++) {
+                if (skip) {
+                    skip = !skip;
+                } else {
+                    tiles.push(gameManager.gameBoard.tiles[counter]);
+                    skip = !skip;
+                }
+
+                counter++;
+            }
+
+            skip = !skip;
+        }
+
+        return tiles;
+    }
+
+    /**
      * Checks if player needs to attack
      * @param {number} player Player
      * @returns {boolean} true if player don't need to attack, otherwise return checkers that can attack
@@ -128,5 +208,22 @@ class Board {
 
             return attackCheckers;
         }
+    };
+
+    /**
+    * Removes duplicates from array and returns a new one
+    * @param {Array} array Array to remove from
+    * @returns {Array} New array without duplicates
+    */
+    static RemoveDuplicates(array) {
+        let uniqueArray = [];
+
+        for (let i = 0; i < array.length; i++) {
+            if (uniqueArray.indexOf(array[i]) === -1) {
+                uniqueArray.push(array[i])
+            }
+        }
+
+        return uniqueArray;
     };
 };

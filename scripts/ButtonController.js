@@ -23,7 +23,7 @@ function Rules() {
         'Men can only go forward',
         'After reaching the end of the board man becomes a king',
         'King can go any direction',
-        'Player wins when there\'s none enemy checkers left'];
+        'Player wins when there\'s no enemy checkers left or if the enemy can\'t move'];
     let message = document.createElement('ul');
 
     rules.map((rule) => {

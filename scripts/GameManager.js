@@ -41,6 +41,16 @@ class GameManager {
         if (checkers.length === 0) {
             return;
         } else {
+            // Lets check if the player can move at all
+            let possible = gameManager.gameBoard.GetPossibleMoves(gameManager.gameBoard.GetAllEmptyTiles(),
+            gameManager.gameBoard.checkers.filter(checker => checker.player === gameManager.player));
+
+            if (possible[1].length === 0 || possible[0].length === 0) {
+                // If not then he loses
+                gameManager.EndTheGame(1);
+                return;
+            }
+
             let tileId = this.getAttribute('id').replace('tile', '');
             let tile = gameManager.gameBoard.tiles[tileId];
             let checker = gameManager.gameBoard.checkers[checkers.item(0).getAttribute('id')];
@@ -83,20 +93,11 @@ class GameManager {
     };
 
     /**
-     * Checks victory for both players and displays it
+     * Ends the game, logs and displays the winner
+     * @param {number} player Player who won 
      */
-    CheckVictory() {
-        let winner;
-
-        if (this.CheckIfAnyLeft(1)) {
-            winner = 1;
-        } else if (this.CheckIfAnyLeft(2)) {
-            winner = 2;
-        } else {
-            return;
-        }
-
-        let messageText = 'Player ' + winner + ' wins!';
+    EndTheGame(player) {
+        let messageText = 'Player ' + player + ' wins!';
 
         Logger.Log(messageText);
 
@@ -105,6 +106,17 @@ class GameManager {
         new Message(message, 'Congratulations').ShowWithHeader();
         // Stop the game
         this.Stop();
+    }
+
+    /**
+     * Checks victory for both players and displays it if someone won
+     */
+    CheckVictory() {
+        if (this.CheckIfAnyLeft(1)) {
+            this.EndTheGame(1);
+        } else if (this.CheckIfAnyLeft(2)) {
+            this.EndTheGame(2);
+        }
     };
 
     /**

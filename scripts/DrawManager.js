@@ -92,7 +92,7 @@ class DrawManger {
 
     /**
      * To help player to see what checker must attack
-     * @param {*} checker The checker to select
+     * @param {Checker} checker The checker to select
      */
     HelpPlayer(checker) {
         checker.element.classList.add('help');
@@ -100,6 +100,7 @@ class DrawManger {
 
     /**
      * To remove help marks on the checkers
+     * @param {Checker[]} checkers Array of checkers to remove 'help' from
     */
     RemoveHelp(checkers) {
         for (let checker of checkers) {
